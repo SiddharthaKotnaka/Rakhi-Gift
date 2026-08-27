@@ -1,0 +1,1555 @@
+/* ==========================================================================
+   1. CSS Custom Properties & Reset
+   ========================================================================== */
+:root {
+  --color-ivory: #FDF6EC;
+  --color-cream: #F5E6D3;
+  --color-peach: #F5C7A9;
+  --color-terracotta: #C75B39;
+  --color-burnt-orange: #D4803E;
+  --color-maroon: #6B1D2A;
+  --color-saffron: #D4A843;
+  --color-dark-brown: #3E2723;
+  --color-gold: #C9A84C;
+  --color-text: #3E2723;
+  --color-text-light: #6D4C41;
+  --color-bg: #FDF6EC;
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-handwritten: 'Caveat', cursive;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   2. Typography
+   ========================================================================== */
+.heading-serif {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.handwritten {
+  font-family: var(--font-handwritten);
+  font-weight: 500;
+}
+
+.body-text {
+  font-family: var(--font-sans);
+  line-height: 1.7;
+}
+
+/* Base font clamps */
+h1.heading-serif { font-size: clamp(2rem, 5vw, 4rem); }
+h2.heading-serif { font-size: clamp(1.8rem, 4vw, 3.5rem); }
+.chapter-heading { font-size: clamp(1.8rem, 4vw, 3.5rem); }
+.handwritten-large { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+.body-text { font-size: clamp(1rem, 2vw, 1.2rem); }
+.caption { font-size: clamp(0.9rem, 1.8vw, 1.1rem); }
+
+/* ==========================================================================
+   3. Utility Classes
+   ========================================================================== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-terracotta);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  z-index: 99999;
+  text-decoration: none;
+  font-weight: bold;
+}
+.skip-link:focus {
+  top: 10px;
+}
+
+.full-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.section-padding {
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3.5rem);
+}
+
+.chapter-label {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.8rem;
+  background: rgba(199, 91, 57, 0.08);
+  border-radius: 20px;
+}
+
+.chapter-heading {
+  margin-bottom: 0.75rem;
+}
+
+.chapter-subtext {
+  max-width: 600px;
+  margin: 0 auto 1.25rem;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.scrapbook-badge-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.scrapbook-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 1.2rem;
+  background: #fff;
+  border: 1.5px dashed var(--color-peach);
+  border-radius: 20px;
+  color: var(--color-terracotta);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  box-shadow: 0 2px 8px rgba(62, 39, 35, 0.05);
+  transform: rotate(-1deg);
+  transition: transform 0.2s ease;
+}
+
+.scrapbook-badge:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+/* ==========================================================================
+   4. Preloader (#preloader)
+   ========================================================================== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-ivory);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+body.loaded #preloader {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-rakhi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.rakhi-ring {
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--color-terracotta);
+  border-radius: 50%;
+  position: relative;
+  animation: spin 3s linear infinite;
+}
+
+.rakhi-thread {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 3px;
+  background: var(--color-terracotta);
+  z-index: -1;
+  animation: thread-extend 2s ease-in-out infinite alternate;
+}
+
+.preloader-text {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   5. Confetti Canvas (#confetti-canvas)
+   ========================================================================== */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ==========================================================================
+   6. Chapter 0: The Surprise (#chapter-0)
+   ========================================================================== */
+#chapter-0 {
+  background: var(--color-cream);
+  background-image: radial-gradient(circle at center, rgba(0,0,0,0.02) 0%, transparent 100%);
+  transition: opacity 0.5s ease;
+}
+
+#chapter-0.hidden {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.chapter-0-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.envelope-icon {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.envelope-body {
+  width: 120px;
+  height: 80px;
+  background: var(--color-peach);
+  border-radius: 4px;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-top: 45px solid #E5B496; /* slightly darker peach */
+}
+
+.envelope-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  animation: envelope-float 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+.chapter-0-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.chapter-0-question {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  margin-bottom: 2rem;
+  color: var(--color-text-light);
+}
+
+.chapter-0-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--color-terracotta);
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(199, 91, 57, 0.3);
+}
+
+.btn-primary:hover, .btn-primary:focus-visible {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(199, 91, 57, 0.4);
+}
+
+.btn-playful {
+  background: transparent;
+  border: 2px solid var(--color-dark-brown);
+  color: var(--color-dark-brown);
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--color-terracotta);
+  color: var(--color-terracotta);
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover, .btn-secondary:focus-visible {
+  background: var(--color-terracotta);
+  color: white;
+}
+
+/* ==========================================================================
+   7. Greeting (#greeting)
+   ========================================================================== */
+#greeting {
+  background: var(--color-ivory);
+}
+
+.greeting-content {
+  text-align: center;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+.greeting-title {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  margin-bottom: 1.25rem;
+}
+
+.greeting-subtitle {
+  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  color: var(--color-text-light);
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+.scroll-arrow-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.scroll-hint {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scroll-arrow {
+  font-size: 1.5rem;
+  animation: bounce 2s infinite;
+  color: var(--color-terracotta);
+}
+
+/* ==========================================================================
+   8. Chapter 1: Polaroid Scatter (#chapter-1)
+   ========================================================================== */
+#chapter-1 {
+  text-align: center;
+}
+
+.polaroid-scatter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 0 1rem;
+}
+
+@media (min-width: 600px) {
+  .polaroid-scatter {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .polaroid-scatter {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+.polaroid {
+  background: white;
+  padding: 0.75rem 0.75rem 2.25rem;
+  box-shadow: 0 6px 20px rgba(62, 39, 35, 0.12);
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+  cursor: pointer;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 270px;
+  border-radius: 2px;
+}
+
+.polaroid:hover, .polaroid:focus-within {
+  transform: rotate(0deg) translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(62, 39, 35, 0.18);
+  z-index: 10;
+}
+
+.polaroid:nth-child(1) { --rotation: -3deg; }
+.polaroid:nth-child(2) { --rotation: 2.5deg; }
+.polaroid:nth-child(3) { --rotation: -2deg; }
+.polaroid:nth-child(4) { --rotation: 3deg; }
+
+.polaroid::before {
+  content: '';
+  background: rgba(200, 180, 150, 0.5);
+  width: 60px;
+  height: 20px;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 1px;
+  z-index: 2;
+  display: none; /* Hidden when JS tape-strip element is used */
+}
+
+.tape-strip {
+  background: rgba(212, 168, 67, 0.4);
+  width: 65px;
+  height: 20px;
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 2px;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.polaroid-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+}
+
+.polaroid-caption {
+  font-family: var(--font-handwritten);
+  text-align: center;
+  margin-top: 0.6rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   9. Photo Reveal (#photo-reveal)
+   ========================================================================== */
+#photo-reveal {
+  text-align: center;
+  background: var(--color-bg);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 3.5rem);
+}
+
+.reveal-heading {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  margin-bottom: 1.25rem;
+  color: var(--color-text-light);
+}
+
+.reveal-container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.reveal-frame {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 6px 25px rgba(62, 39, 35, 0.15);
+  border: 4px solid white;
+}
+
+#reveal-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reveal-paper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-cream);
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: transform 0.5s ease;
+  z-index: 2;
+  user-select: none;
+  touch-action: pan-y;
+  border: 2px dashed var(--color-peach);
+}
+
+.reveal-paper:active {
+  cursor: grabbing;
+}
+
+.reveal-paper .handwritten {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  pointer-events: none;
+  color: var(--color-terracotta);
+  font-weight: 600;
+}
+
+.reveal-paper.revealed {
+  transform: translateX(110%);
+}
+
+#reveal-btn {
+  margin-top: 1.25rem;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   10. Chapter 2: Gallery (#chapter-2)
+   ========================================================================== */
+#chapter-2 {
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+}
+
+@media (max-width: 639px) {
+  .gallery-grid {
+    border-left: 3px solid var(--color-peach);
+    padding-left: 1.25rem;
+    margin-left: 0.75rem;
+    position: relative;
+  }
+}
+
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .gallery-grid .memory-item:nth-child(5n+1) {
+    grid-column: span 2;
+  }
+}
+
+.memory-item {
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(62, 39, 35, 0.08);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+  position: relative;
+  text-align: left;
+  border: 1px solid rgba(245, 199, 169, 0.3);
+}
+
+@media (max-width: 639px) {
+  .memory-item::before {
+    content: '';
+    position: absolute;
+    left: -1.25rem;
+    top: 2rem;
+    width: 12px;
+    height: 12px;
+    background: var(--color-terracotta);
+    border-radius: 50%;
+    transform: translateX(-5.5px);
+    border: 2px solid var(--color-bg);
+  }
+}
+
+.memory-item:nth-child(even) { transform: rotate(1deg); }
+.memory-item:nth-child(odd) { transform: rotate(-1deg); }
+
+.memory-item:hover, .memory-item:focus-within {
+  transform: translateY(-6px) rotate(0deg) scale(1.02);
+  box-shadow: 0 10px 25px rgba(62, 39, 35, 0.15);
+  z-index: 5;
+}
+
+.memory-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.memory-info {
+  padding: 1rem;
+}
+
+.memory-number {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--color-terracotta);
+  font-weight: 700;
+  display: block;
+}
+
+.memory-caption {
+  font-family: var(--font-handwritten);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  color: var(--color-text-light);
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.memory-year {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.memory-item:nth-child(3)::after {
+  content: '❤️';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   11. Chapter 3: Chaos (#chapter-3, .chapter-chaos)
+   ========================================================================== */
+.chapter-chaos {
+  background: var(--color-cream);
+  text-align: center;
+}
+
+.chaos-conversation {
+  max-width: 500px;
+  margin: 0 auto 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  text-align: left;
+}
+
+.speech-bubble {
+  padding: 0.85rem 1.25rem;
+  border-radius: 18px;
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  max-width: 80%;
+  position: relative;
+}
+
+.speech-right {
+  background: var(--color-peach);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.speech-right::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid var(--color-peach);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.speech-left {
+  background: white;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--color-peach);
+}
+
+.speech-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-right: 10px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.chaos-resolve {
+  text-align: center;
+  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  color: var(--color-text-light);
+  margin: 1.5rem auto;
+}
+
+#fight-simulator {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 450px;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+  border: 2px dashed var(--color-peach);
+}
+
+.fight-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  margin-bottom: 1rem;
+}
+
+.fight-output {
+  min-height: 110px;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem;
+  margin-bottom: 1rem;
+  background: var(--color-bg);
+  border-radius: 8px;
+  gap: 0.5rem;
+}
+
+.fight-prompt {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--color-text-light);
+}
+
+.fight-message {
+  animation: fadeInUp 0.3s ease;
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--color-terracotta);
+  width: 100%;
+}
+
+.fight-left {
+  text-align: left;
+}
+
+.fight-right {
+  text-align: right;
+}
+
+.fight-center {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   12. Chapter 4: Letter (#chapter-4, .chapter-letter)
+   ========================================================================== */
+.chapter-letter {
+  background: var(--color-ivory);
+  text-align: center;
+}
+
+.letter-container {
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#envelope {
+  width: 260px;
+  height: 160px;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  perspective: 800px;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: var(--color-peach);
+  border-radius: 4px;
+}
+
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: #E5B496; /* slightly darker peach */
+  border-radius: 0 0 4px 4px;
+  z-index: 2;
+}
+
+.envelope-flap-letter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: var(--color-peach);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top center;
+  transition: transform 0.6s ease;
+  z-index: 3;
+}
+
+#envelope.open .envelope-flap-letter {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+#letter-paper {
+  background-color: white;
+  background-image: repeating-linear-gradient(transparent, transparent 28px, #e8ddd0 28px, #e8ddd0 29px);
+  background-size: 100% 29px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.8s ease;
+  position: relative;
+  z-index: 1;
+}
+
+#letter-paper.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.letter-content {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 29px; /* Align with ruled lines */
+  text-align: left;
+  color: var(--color-dark-brown);
+}
+
+.letter-stage {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease;
+}
+
+.letter-stage.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter-signature {
+  text-align: right;
+  margin-top: 2rem;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--color-terracotta);
+}
+
+#read-letter-btn {
+  margin-top: 1.5rem;
+}
+
+/* ==========================================================================
+   13. Chapter 5: Rakhi (#chapter-5, .chapter-rakhi)
+   ========================================================================== */
+.chapter-rakhi {
+  background: linear-gradient(135deg, var(--color-maroon), #4a1520);
+  color: var(--color-ivory);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-rakhi .chapter-label {
+  color: var(--color-saffron);
+}
+
+.chapter-rakhi .heading-serif {
+  color: var(--color-ivory);
+}
+
+.rakhi-thread-line {
+  width: 100%;
+  height: 3px;
+  position: relative;
+  margin: 2rem 0;
+}
+
+.rakhi-thread-animated {
+  height: 100%;
+  background: var(--color-gold);
+  width: 0;
+  transition: width 1.5s ease;
+  margin: 0 auto;
+}
+
+.rakhi-thread-animated.visible {
+  width: 80%;
+}
+
+.rakhi-text-sequence {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.rakhi-line {
+  font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.rakhi-art {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  margin: 3rem auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rakhi-outer {
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--color-gold);
+  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+}
+
+.rakhi-middle {
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--color-saffron);
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 20%, rgba(212, 168, 67, 0.2) 80%);
+  position: absolute;
+}
+
+.rakhi-inner {
+  width: 50px;
+  height: 50px;
+  background: var(--color-terracotta);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.rakhi-gem {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(var(--color-gold), var(--color-saffron));
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+  position: absolute;
+}
+
+.rakhi-art:hover, .rakhi-art:focus-visible {
+  transform: rotate(15deg);
+  filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.4));
+}
+
+.rakhi-art.tapped {
+  animation: rakhi-pulse 0.6s ease;
+}
+
+.rakhi-tap-hint {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--color-peach);
+  text-align: center;
+}
+
+.rakhi-promise {
+  text-align: center;
+  max-width: 500px;
+  margin: 3rem auto;
+}
+
+.rakhi-promise-text {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  line-height: 1.6;
+}
+
+.rakhi-tied-message {
+  text-align: center;
+  padding: 2rem;
+}
+
+.rakhi-tied-message p {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: 0.5rem;
+  color: var(--color-gold);
+}
+
+.floating-particle {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: float-up 2s ease forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   14. Final Photo (#final-photo)
+   ========================================================================== */
+#final-photo {
+  text-align: center;
+  background: var(--color-bg);
+}
+
+.final-photo-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.final-text {
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
+  margin-bottom: 1.5rem;
+}
+
+.final-photo-frame {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 8px solid white;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: transform 1s ease;
+}
+
+.final-photo-frame.zoomed {
+  transform: scale(1);
+}
+
+#final-photo-img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.final-text-big {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--color-terracotta);
+  margin-top: 2rem;
+}
+
+/* ==========================================================================
+   15. Finale (#finale)
+   ========================================================================== */
+#finale {
+  background: var(--color-ivory);
+}
+
+.finale-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.finale-line {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  margin-bottom: 1.5rem;
+  color: var(--color-text-light);
+}
+
+.finale-love {
+  font-family: var(--font-handwritten);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-terracotta);
+  margin-bottom: 2rem;
+}
+
+.finale-from {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--color-text-light);
+  margin-bottom: 3rem;
+}
+
+/* ==========================================================================
+   16. Footer (#footer)
+   ========================================================================== */
+#footer {
+  background: var(--color-dark-brown);
+  color: var(--color-cream);
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.footer-text {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 0.5rem;
+}
+
+.footer-heart {
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.2s;
+  font-style: normal;
+}
+
+.footer-heart:hover, .footer-heart:focus-visible {
+  transform: scale(1.3);
+}
+
+.footer-dedication {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  margin-bottom: 0.3rem;
+}
+
+.footer-year {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.footer-rakhi-icon {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.3s;
+}
+
+.footer-rakhi-icon:hover, .footer-rakhi-icon:focus-visible {
+  transform: rotate(20deg);
+}
+
+.secret-message, .easter-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  animation: fadeInUp 0.5s ease;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   17. Lightbox (#lightbox)
+   ========================================================================== */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+  position: relative;
+  z-index: 1;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.lightbox-btn {
+  position: absolute;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lightbox-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.lightbox-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.lightbox-close-btn {
+  top: -60px;
+  right: 0;
+}
+
+.lightbox-prev-btn {
+  left: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next-btn {
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .lightbox-close-btn {
+    top: 10px;
+    right: 10px;
+    position: fixed;
+  }
+  .lightbox-prev-btn {
+    left: 10px;
+    position: fixed;
+    top: 50%;
+  }
+  .lightbox-next-btn {
+    right: 10px;
+    position: fixed;
+    top: 50%;
+  }
+}
+
+.lightbox-info {
+  text-align: center;
+  margin-top: 1rem;
+  color: white;
+}
+
+.lightbox-number {
+  font-family: var(--font-handwritten);
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  display: block;
+}
+
+.lightbox-caption {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  opacity: 0.9;
+  margin-top: 0.3rem;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   18. Floating UI
+   ========================================================================== */
+.floating-btn {
+  position: fixed;
+  z-index: 8000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.music-btn {
+  bottom: 20px;
+  right: 20px;
+  background: var(--color-dark-brown);
+  color: var(--color-cream);
+}
+
+.music-btn.playing .music-icon {
+  animation: music-pulse 1s infinite;
+}
+
+.progress-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 8000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .progress-nav {
+    display: none;
+  }
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-peach);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.progress-dot.active {
+  background: var(--color-terracotta);
+  transform: scale(1.4);
+}
+
+.progress-dot:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   19. Scroll Animations
+   ========================================================================== */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.polaroid.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px) rotate(var(--rotation, 0deg));
+}
+
+.polaroid.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rotation, 0deg));
+}
+
+.memory-item.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.memory-item.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-animate:nth-child(2) { transition-delay: 0.08s; }
+.scroll-animate:nth-child(3) { transition-delay: 0.16s; }
+.scroll-animate:nth-child(4) { transition-delay: 0.24s; }
+
+/* ==========================================================================
+   20. General Animations (@keyframes)
+   ========================================================================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes envelope-float {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, calc(-50% - 8px)); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes thread-extend {
+  from { width: 0; }
+  to { width: 140px; }
+}
+
+@keyframes rakhi-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1) rotate(10deg); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float-up {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-100px) scale(0.5); }
+}
+
+@keyframes music-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* ==========================================================================
+   21. Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-animate {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   22. Responsive Breakpoints
+   ========================================================================== */
+@media (min-width: 480px) {
+  /* Phone landscape / large phone */
+}
+
+@media (min-width: 768px) {
+  /* Tablet */
+}
+
+@media (min-width: 1024px) {
+  /* Laptop */
+}
+
+@media (min-width: 1280px) {
+  /* Desktop */
+}
+
+@media (min-width: 1440px) {
+  /* Large desktop */
+}

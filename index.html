@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Raksha Bandhan ❤️</title>
+    <meta name="description" content="A cinematic Raksha Bandhan memory website from a brother to his sister.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. Skip Link -->
+    <a href="#greeting" class="skip-link">Skip to content</a>
+
+    <!-- 2. Preloader -->
+    <div id="preloader" role="status" aria-label="Loading memories">
+        <div class="preloader-content">
+            <div class="preloader-rakhi">
+                <div class="rakhi-ring"></div>
+                <div class="rakhi-thread"></div>
+            </div>
+            <p class="preloader-text handwritten">Loading some very old memories…</p>
+        </div>
+    </div>
+
+    <!-- 3. Confetti Canvas -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- 4. Chapter 0: The Surprise -->
+    <section id="chapter-0" class="full-screen" aria-label="Opening surprise">
+        <div class="chapter-0-content">
+            <div class="envelope-icon" aria-hidden="true">
+                <div class="envelope-body"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-heart">❤️</div>
+            </div>
+            <h1 class="chapter-0-title">
+                <span class="handwritten">Hey, Sweety Akka…</span><br>
+                <span class="handwritten">I made something for you.</span>
+            </h1>
+            <p class="chapter-0-question handwritten">Do you wanna see?</p>
+            <div class="chapter-0-buttons">
+                <button id="yes-btn" class="btn-primary">YES ❤️</button>
+                <button id="no-btn" class="btn-playful">NO 🙄</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Greeting -->
+    <section id="greeting" class="full-screen">
+        <div class="greeting-content">
+            <h2 class="greeting-title heading-serif">Happy Raksha Bandhan, <span id="sister-name-greeting">Sweety Akka</span> ❤️</h2>
+            <p class="greeting-subtitle handwritten scroll-animate">Before you judge these old photos…<br>just remember how cute we actually were.</p>
+            <div class="scroll-arrow-container scroll-animate">
+                <p class="scroll-hint">Scroll slowly</p>
+                <div class="scroll-arrow">↓</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Chapter 1: The Little Us -->
+    <section id="chapter-1" class="section-padding">
+        <div class="chapter-label scroll-animate">Chapter 1</div>
+        <h2 class="heading-serif chapter-heading scroll-animate">Once upon a time…</h2>
+        <p class="body-text chapter-subtext scroll-animate">There were two kids who had absolutely no idea<br>how many memories they were creating.</p>
+        <div class="scrapbook-badge-container scroll-animate">
+            <span class="scrapbook-badge handwritten">✨ 4 Core Childhood Memories • Click to zoom 🔍</span>
+        </div>
+        <div id="childhood-polaroids" class="polaroid-scatter"></div>
+    </section>
+
+    <!-- 7. Photo Reveal -->
+    <section id="photo-reveal" class="section-padding">
+        <p class="handwritten reveal-heading scroll-animate">Some memories deserve to be uncovered.</p>
+        <div class="reveal-container scroll-animate">
+            <div class="reveal-frame">
+                <img id="reveal-photo" src="images/photo01.jpeg" alt="A hidden childhood memory" loading="lazy">
+                <div id="reveal-paper" class="reveal-paper" role="button" tabindex="0" aria-label="Drag to reveal">
+                    <span class="handwritten">Drag to reveal ✨</span>
+                </div>
+            </div>
+            <button id="reveal-btn" class="btn-secondary">Reveal memory</button>
+        </div>
+    </section>
+
+    <!-- 8. Chapter 2: 15 Memories -->
+    <section id="chapter-2" class="section-padding">
+        <div class="chapter-label scroll-animate">Chapter 2</div>
+        <h2 class="heading-serif chapter-heading scroll-animate">15 Memories</h2>
+        <p class="body-text chapter-subtext scroll-animate">A scrapbook of us, from then to now.</p>
+        <div class="scrapbook-badge-container scroll-animate">
+            <span class="scrapbook-badge handwritten">📸 Our Childhood Album • 15 Special Chapters ❤️</span>
+        </div>
+        <div id="gallery-grid" class="gallery-grid" role="list"></div>
+    </section>
+
+    <!-- 9. Chapter 3: The Chaos -->
+    <section id="chapter-3" class="section-padding chapter-chaos">
+        <div class="chapter-label scroll-animate">Chapter 3</div>
+        <h2 class="heading-serif chapter-heading scroll-animate">Then came the fights…</h2>
+        <div class="chaos-conversation">
+            <div class="speech-right scroll-animate">Who started it?</div>
+            <div class="speech-left scroll-animate">Definitely not me.</div>
+            <div class="speech-right scroll-animate">She says it was me.</div>
+            <div class="speech-left scroll-animate">I have no evidence. 🤷</div>
+        </div>
+        <p class="handwritten chaos-resolve scroll-animate">But somehow we always ended up laughing again.</p>
+        <div id="fight-simulator">
+            <h3 class="handwritten fight-title">⚡ Sibling Fight Simulator ⚡</h3>
+            <div id="fight-output" class="fight-output" aria-live="polite">
+                <p class="handwritten fight-prompt">Ready to relive the chaos?</p>
+            </div>
+            <button id="fight-btn" class="btn-primary">START SIBLING FIGHT</button>
+            <button id="fight-replay" class="btn-secondary" hidden>Play Again ↻</button>
+        </div>
+    </section>
+
+    <!-- 10. Chapter 4: Letter -->
+    <section id="chapter-4" class="section-padding chapter-letter">
+        <div class="chapter-label scroll-animate">Chapter 4</div>
+        <h2 class="heading-serif chapter-heading scroll-animate">Okay… jokes apart.</h2>
+        <p class="body-text chapter-subtext scroll-animate">There are some things I don't say often enough.</p>
+        <div class="letter-container scroll-animate">
+            <div id="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-front"></div>
+                <div class="envelope-flap-letter"></div>
+            </div>
+            <div id="letter-paper">
+                <div id="letter-content" class="letter-content handwritten"></div>
+                <div class="letter-signature handwritten">
+                    <span id="letter-sign">Your annoying Bablu ❤️</span>
+                </div>
+            </div>
+            <button id="read-letter-btn" class="btn-secondary">Read the whole letter</button>
+        </div>
+    </section>
+
+    <!-- 11. Chapter 5: Rakhi -->
+    <section id="chapter-5" class="section-padding chapter-rakhi">
+        <div class="chapter-label scroll-animate">Chapter 5</div>
+        <div class="rakhi-thread-line" aria-hidden="true">
+            <div id="rakhi-thread-anim" class="rakhi-thread-animated"></div>
+        </div>
+        <div class="rakhi-text-sequence">
+            <p class="heading-serif rakhi-line scroll-animate">A rakhi is just a thread…</p>
+            <p class="heading-serif rakhi-line scroll-animate">But somehow it carries years of memories.</p>
+            <p class="heading-serif rakhi-line scroll-animate">And one promise.</p>
+        </div>
+        <div class="rakhi-interactive scroll-animate">
+            <button id="rakhi-element" class="rakhi-art" aria-label="Tap the rakhi">
+                <div class="rakhi-outer"></div>
+                <div class="rakhi-middle"></div>
+                <div class="rakhi-inner"></div>
+                <div class="rakhi-gem"></div>
+            </button>
+            <p class="handwritten rakhi-tap-hint">tap the rakhi ✨</p>
+        </div>
+        <div class="rakhi-promise scroll-animate">
+            <p class="heading-serif rakhi-promise-text">No matter how much life changes,<br>I'll always be your brother.</p>
+        </div>
+        <div id="rakhi-message" class="rakhi-tied-message" hidden>
+            <p class="heading-serif">Tied with love.</p>
+            <p class="heading-serif">Built on memories.</p>
+            <p class="heading-serif">Forever.</p>
+        </div>
+    </section>
+
+    <!-- 12. Final Photo -->
+    <section id="final-photo" class="full-screen section-padding">
+        <div class="final-photo-container">
+            <p class="heading-serif final-text scroll-animate">And this…</p>
+            <div class="final-photo-frame scroll-animate">
+                <img id="final-photo-img" loading="lazy" alt="One of my favorite memories">
+            </div>
+            <p class="heading-serif final-text scroll-animate">This is still one of my favorite memories.</p>
+            <p class="body-text final-text scroll-animate">But honestly…</p>
+            <p class="handwritten final-text-big scroll-animate">My favorite part is that we still have thousands more to make.</p>
+        </div>
+    </section>
+
+    <!-- 13. Finale -->
+    <section id="finale" class="full-screen">
+        <div class="finale-content">
+            <p class="heading-serif finale-line scroll-animate">One last thing…</p>
+            <h2 class="heading-serif finale-love scroll-animate">Love you, Dr.Sweety Akka. ❤️</h2>
+            <p class="heading-serif finale-line scroll-animate">Happy Raksha Bandhan.</p>
+            <p class="handwritten finale-from scroll-animate">From your permanently annoying Bablu.</p>
+            <button id="restart-btn" class="btn-primary scroll-animate">START THE MEMORIES AGAIN ↻</button>
+        </div>
+    </section>
+
+    <!-- 14. Footer -->
+    <footer id="footer">
+        <p class="handwritten footer-text">Made with <span id="secret-heart" class="footer-heart" role="button" tabindex="0" aria-label="A little heart">❤️</span>, memories & a little bit of sibling chaos.</p>
+        <p class="handwritten footer-dedication">For Dr.Sweety Akka.</p>
+        <p class="handwritten footer-year">Raksha Bandhan <span id="footer-year">2026</span></p>
+        <button id="easter-rakhi" class="footer-rakhi-icon" aria-label="A decorative rakhi">🪷</button>
+        
+        <div id="secret-msg" class="secret-message" hidden>
+            <p class="handwritten">You're stuck with me forever. 😌❤️</p>
+        </div>
+        <div id="easter-msg" class="easter-message" hidden>
+            <p class="handwritten">Rakhi level unlocked 🪷 ✨</p>
+        </div>
+    </footer>
+
+    <!-- 15. Lightbox -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <button id="lightbox-close" class="lightbox-btn lightbox-close-btn">✕</button>
+            <button id="lightbox-prev" class="lightbox-btn lightbox-prev-btn">‹</button>
+            <img id="lightbox-img" class="lightbox-image" alt="Enlarged memory">
+            <button id="lightbox-next" class="lightbox-btn lightbox-next-btn">›</button>
+            <div class="lightbox-info">
+                <span id="lightbox-num" class="lightbox-number handwritten"></span>
+                <span id="lightbox-caption" class="lightbox-caption handwritten"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 16. Floating Music Button -->
+    <button id="music-btn" class="floating-btn music-btn" aria-label="Play background music" title="Toggle music">
+        <span class="music-icon">♫</span>
+    </button>
+    <audio id="music-audio" preload="none" loop>
+        <source src="music/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 17. Progress Nav -->
+    <nav id="progress-nav" class="progress-nav" aria-label="Story progress"></nav>
+
+    <!-- 18. Script tag -->
+    <script src="script.js"></script>
+</body>
+</html>
