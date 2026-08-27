@@ -4,10 +4,10 @@
 
 const CONFIG = {
   // Sister's name (displayed throughout the website)
-  sisterName: 'Didi',
+  sisterName: 'Dr.Sweety akka',
   
   // Brother's name (used in letter signature area)
-  brotherName: 'Your Brother',
+  brotherName: 'Your Bablu',
   
   // Year
   year: '2026',
